@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Cars</title>
-    <style>table th, table td {padding: 5px;}</style>
+    <style>table th, table td {padding: 10px;}</style>
 </head>
 <body>
 
 
 
 </div>
-<table border="1" >
+<table data-th-border="2"  >
     <tr>
         <th>Id</th>
         <th>MODEL</th>
@@ -19,9 +19,18 @@
     </tr>
     <tr th:each="car : ${cars}">
         <td th:text="${car.getId()}">id</td>
-        <td th:text="${car.getModel()}">model</td>
+        <td th:text="${car.getName()}">model</td>
         <td th:text="${car.getSeries()}">series</td>
+
+        <td>
+            <tbody>
+            <form action="#" data-th-action="@{/action/edit}" data-th-object="${model}" method="post">
+                <button type="submit" name="action" value="save">add</button>
+                <button type="submit" name="action" value="cancel">delete</button>
+            </form>
+            </tbody>
+        </td>
     </tr>
-<table>
+</table>
 </body>
 </html>

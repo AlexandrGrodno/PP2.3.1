@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>table th, table td {padding: 10px;}</style>
+</head>
+<body>
+
+
+
+</div>
+<table data-th-border="2"  >
+    <tr>
+        <th>Id</th>
+        <th>NAME</th>
+        <th>MAIL</th>
+        <th>AGE</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.getId()}">id</td>
+        <td th:text="${user.getName()}">model</td>
+        <td th:text="${user.getMail()}">series</td>
+        <td th:text="${user.getAge()}">series</td>
+
+    </tr>
+    </table>
+<button type="submit">Добавить в корзину</button>
+</body>
+</html>
