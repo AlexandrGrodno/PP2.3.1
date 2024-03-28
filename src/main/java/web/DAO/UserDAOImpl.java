@@ -26,6 +26,12 @@ public class UserDAOImpl implements UserDAO {
         Query query = em.createQuery("from User");
         return query.getResultList();
     }
+//    @Override
+    public User getIdUser(int id){
+        Query query = em.createQuery("FROM User where id =:idUser");
+        query.setParameter("idUser",id);
+        return (User) query.getSingleResult();
+    }
 
     @Override
     public void addUser() {

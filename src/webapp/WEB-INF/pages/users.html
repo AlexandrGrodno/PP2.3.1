@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:ерЖth="http://www.w3.org/1999/xhtml">
 <html lang="en" >
 <head>
     <meta charset="UTF-8">
@@ -17,15 +18,25 @@
         <th>NAME</th>
         <th>MAIL</th>
         <th>AGE</th>
+
     </tr>
     <tr th:each="user : ${users}">
         <td th:text="${user.getId()}">id</td>
         <td th:text="${user.getName()}">model</td>
         <td th:text="${user.getMail()}">series</td>
-        <td th:text="${user.getAge()}">series</td>
+        <td th:text="${user.getAge()}" >age</td>
+        <TD> <a th:href="@{/user/id?id={id}(id=${user.getId()})}">изменить </a> </TD>
+        <TD> <a href="/cars">удалить</a> </TD>
 
     </tr>
     </table>
-<button type="submit">Добавить в корзину</button>
+
+<button type="submit" action="@{/cars}">Добавить User</button>
+
+
+<form action="#" data-th-action="@{/new/}" data-th-object="${model}" method="post">
+    <button type="submit" name="action" value="new">новая запись</button>
+    <button type="submit" name="action" value="cancel">cancel</button>
+</form>
 </body>
 </html>
