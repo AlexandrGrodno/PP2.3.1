@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 @Component
+
 public class UserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager em;
@@ -26,11 +28,19 @@ public class UserDAOImpl implements UserDAO {
         Query query = em.createQuery("from User");
         return query.getResultList();
     }
-//    @Override
+    @Override
     public User getIdUser(int id){
         Query query = em.createQuery("FROM User where id =:idUser");
         query.setParameter("idUser",id);
         return (User) query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void save(User user) {
+        System.out.println(user.getId());
+        em.merge(user);
+
     }
 
     @Override
@@ -39,7 +49,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void deleteUser() {
+    @Transactional
+    public void deleteUser(int id) {
+        System.out.println(id);
+
+        em.remove(getIdUser(id));
 
     }
 

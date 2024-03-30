@@ -14,29 +14,38 @@
 </div>
 <table data-th-border="2"  >
     <tr>
-        <th>Id</th>
+
         <th>NAME</th>
         <th>MAIL</th>
         <th>AGE</th>
 
     </tr>
     <tr th:each="user : ${users}">
-        <td th:text="${user.getId()}">id</td>
+
         <td th:text="${user.getName()}">model</td>
         <td th:text="${user.getMail()}">series</td>
         <td th:text="${user.getAge()}" >age</td>
-        <TD> <a th:href="@{/user/id?id={id}(id=${user.getId()})}">изменить </a> </TD>
-        <TD> <a href="/cars">удалить</a> </TD>
+        <TD>
+
+            <form th:action="@{/user/id}">
+            <button type="submit" th:name="id" th:value="*{user.getId()}">изменить</button>
+            </form>
+
+        </TD>
+        <td>
+
+            <form th:action="@{/user/deleteUser}">
+            <button type="submit" th:name="id" th:value="*{user.getId()}">удалить</button>
+            </form>
+
+        </td>
 
     </tr>
     </table>
 
-<button type="submit" action="@{/cars}">Добавить User</button>
+    <form action="addUser" >
+    <button type="submit" >Добавить User</button>
 
-
-<form action="#" data-th-action="@{/new/}" data-th-object="${model}" method="post">
-    <button type="submit" name="action" value="new">новая запись</button>
-    <button type="submit" name="action" value="cancel">cancel</button>
-</form>
+    </form>
 </body>
 </html>
