@@ -1,7 +1,5 @@
 package web.model;
 
-//import jakarta.validation.constraints.*;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
