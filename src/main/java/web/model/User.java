@@ -1,19 +1,31 @@
 package web.model;
 
+//import jakarta.validation.constraints.*;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "User" )
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
+
+    @NotEmpty( message = "Введите имя")
+    @Size(min = 2, max = 15, message = "Введите правильное имя")
     @Column(name = "name")
     private String name;
+
     @Column(name = "mail")
+    @Email(message = "не правильный email")
     private String mail;
+
     @Column(name = "age")
+    @Min(value = 0, message = "возраст нее может меньше  0")
+    @Max(value = 120,  message = "возраст нее может больше  120 :)), но это не точно..")
     private int age;
 
     public User() {}

@@ -1,8 +1,11 @@
 package web.controller;
 
+//import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +21,14 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+    @GetMapping(value = "/")
+    public String start() {
+        return "redirect:/user";
+    }
     @GetMapping(value = "/user")
     public String showUser(Model model){
-    model.addAttribute("users",userService.allUser());
-    return "users";
+        model.addAttribute("users",userService.allUser());
+        return "users";
     }
     @GetMapping(value = "/user/id")
     public String editUser(@RequestParam (value = "id",defaultValue = "0") int id,Model model){
@@ -34,7 +41,9 @@ public class UserController {
         return "editUser";
     }
     @PostMapping("/user")
-    public String saveUser(@ModelAttribute("users") User user){
+    public String saveUser(@Validated @ModelAttribute("users") User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "editUser";
         userService.save(user);
         return "redirect:/user";
     }
