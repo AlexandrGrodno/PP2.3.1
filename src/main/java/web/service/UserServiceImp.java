@@ -2,12 +2,14 @@ package web.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import web.DAO.UserDAO;
 import web.model.User;
 
 import java.util.List;
 
-@Component
+@Service
 public class UserServiceImp implements UserService {
     private UserDAO userDAO;
     @Autowired
@@ -16,11 +18,13 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    @Transactional
     public void save(User user) {
         userDAO.save(user);
     }
 
     @Override
+    @Transactional
     public void deleteUser(int id) {
         userDAO.deleteUser(id);
     }

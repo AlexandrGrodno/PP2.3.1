@@ -1,19 +1,20 @@
 package web.DAO;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+//import org.hibernate.SessionFactory;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 import web.model.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+//import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
-@Component
 
+@Repository
 public class UserDAOImpl implements UserDAO {
     @PersistenceContext
     private EntityManager em;
@@ -36,7 +37,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    @Transactional
     public void save(User user) {
         System.out.println(user.getId());
         em.merge(user);
@@ -49,7 +49,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    @Transactional
+
     public void deleteUser(int id) {
         System.out.println(id);
 
